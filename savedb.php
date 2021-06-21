@@ -1,7 +1,7 @@
 <?php
     if (isset($_POST)){
         
-        include "./conn.php";
+        include "conn.php";
 
         $Tt = mysqli_escape_string($mysqli,$_POST['Tt']);
         $Hh = mysqli_escape_string($mysqli,$_POST['Hh']);
