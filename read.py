@@ -1,7 +1,7 @@
 import serial
 import requests
 
-urls = "http://192.168.0.106/savedb.php"
+urls = "http://127.0.0.1/savedb.php"
 arduino = serial.Serial("COM4", timeout=1, baudrate=9600)
 
 while True:
