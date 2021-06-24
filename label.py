@@ -34,7 +34,8 @@ def main(argv):
             Pp = arg
         
     # filepath = r"D:\Application\xampp\htdocs\piranti\meteorological-singapore.csv"
-    filepath = r"C:\xampp\htdocs\pc2021\meteorological-singapore.csv"
+    # filepath = r"C:\xampp\htdocs\pc2021\meteorological-singapore.csv"
+    filepath = r"C:\xampp\htdocs\Klasisfikasi-curah-hujan\dataPC.csv"
 
     train = pd.read_csv(filepath)
     x  = train.drop(columns=['Precipitation'])

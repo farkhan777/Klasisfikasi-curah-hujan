@@ -1,16 +1,16 @@
 <html>
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha512-O2Y8hD83PQtRf8vcr0N+yxwRtErIVaHJ4NOpojzq2yvUmhiJbQIT9OAYu27t+mVk814t+ongBVGx+YGylICVkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha512-GsqF810cNwHMCDELTwi3YgWIBwKYQlvC1WTAJ6fk80rtB6zN3IWdpoQujBQCuOMOxXXksEWwE0k4Lrb+N87DZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script src="https:cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
         <script src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.5.0/chartjs-plugin-streaming.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     </head>
     <body>
         <div>
-            <div class="alert alert dark" id = "predicts" role = "alert">
-            </div>
-            <canvas id="myChart"></canvas>
+        <div class="alert alaert-dark" id="predicts" role="alert"></div>
+        <canvas id="myChart"></canvas><h1>test</h1>
+
         </div>
 
         <script type="text/javascript">
@@ -24,12 +24,12 @@
                 grey: 'rgb(201, 203, 207)'
             };
 
-            var label = ' ';
+            var label = '';
             var Tt = 0;
             var Hh = 0;
             var Pp = 0;
 
-            function GetTt(){
+              function GetTt(){
                 $.ajax({
                     url: 'getdata.php',
                     method: 'POST',
@@ -47,7 +47,7 @@
                 return Tt;
             }
 
-            function GetHh(){
+            function GetHh() {
                 $.ajax({
                     url: 'getdata.php',
                     method: 'POST',
@@ -56,7 +56,7 @@
                         key: 'getdataHh'
                     }, success: function (response) {
                         if(response != 'nodata'){
-                            Hh = parseFloat(response);
+                            Hh = parseFloat(response)
                         }else{
                             Hh = 0;
                         }
@@ -65,7 +65,7 @@
                 return Hh;
             }
 
-            function GetPp(){
+            function GetPp() {
                 $.ajax({
                     url: 'getdata.php',
                     method: 'POST',
@@ -74,31 +74,31 @@
                         key: 'getdataPp'
                     }, success: function (response) {
                         if(response != 'nodata'){
-                            Pp = parseFloat(response);
+                            Pp = parseFloat(response)
                         }else{
                             Pp = 0;
                         }
                     }
                 });
-                return Hh;
+                return Pp;
             }
 
-            function getLabel(){
+            function getLabel() {
                 $.ajax({
                     url: 'getdata.php',
                     method: 'POST',
                     dataType: 'text',
                     data: {
-                        key: 'getdatalabel'
-                    }, success: function (response) {
+                        key: 'getdataLabel'
+                    }, succes: function (response) {
                         if(response != 'nodata'){
                             label = '';
-                            label = label + '<strong>' + Date(Date.now()).toString() + ' : </strong>' + response.toString();
+                            label = label +'<strong>' + Date(Date.now()).toString + ' : <strong>' + response.toString();
                             $('#predicts').empty();
                             $('#predicts').append(label);
                         }else{
                             label = '';
-                            label = label + '<strong>' + Date(Date.now()).toString() + ' : </strong> No Prediction Available';
+                            label = label +'<strong>' + Date(Date.now()).toString + ' : <strong> No Prediction Available';
                             $('#predicts').empty();
                             $('#predicts').append(label);
                         }
@@ -106,16 +106,16 @@
                 });
             }
 
-            function onRefresh(chart){
-                chart.data.dataset[0].data.push({
+            function onRefresh(chart) {
+                chart.data.datasets[0].data.push({
                     x: Date.now(),
                     y: GetTt()
                 });
-                chart.data.dataset[1].data.push({
+                chart.data.datasets[1].data.push({
                     x: Date.now(),
                     y: GetHh()
                 });
-                chart.data.dataset[2].data.push({
+                chart.data.datasets[2].data.push({
                     x: Date.now(),
                     y: GetPp()
                 });
@@ -128,29 +128,29 @@
                 data: {
                     datasets: [{
                         label: 'Dataset Temperature',
-                        backgroundColor: color(chartColor.red).alpha(0.5).rgbString(),
+                        backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
                         borderColor: chartColors.red,
                         fill: false,
                         cubicInterpolationMode: 'monotone',
-                        lineTension: 0;
+                        lineTension: 0,
                         borderDash: [8, 4],
                         data: []
                     }, {
                         label: 'Dataset Humidity',
-                        backgroundColor: color(chartColor.blue).alpha(0.5).rgbString(),
-                        borderColor: chartColors.red,
+                        backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
+                        borderColor: chartColors.blue,
                         fill: false,
                         cubicInterpolationMode: 'monotone',
-                        lineTension: 0;
+                        lineTension: 0,
                         borderDash: [8, 4],
                         data: []
                     }, {
                         label: 'Dataset Pressure',
-                        backgroundColor: color(chartColor.green).alpha(0.5).rgbString(),
+                        backgroundColor: color(chartColors.green).alpha(0.5).rgbString(),
                         borderColor: chartColors.green,
                         fill: false,
                         cubicInterpolationMode: 'monotone',
-                        lineTension: 0;
+                        lineTension: 0,
                         borderDash: [8, 4],
                         data: []
                     }]
@@ -195,6 +195,5 @@
 
             var colorNames = Object.keys(chartColors);
         </script>
-        
     </body>
 </html>
